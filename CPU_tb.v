@@ -75,16 +75,7 @@ initial begin
  instruction = {5'b10000, 4'd1, 4'b0,14'd20};  // load r1, 40
  uut.regfile[1] = 19'd5678; #10;
  
- uut.regfile[1] = 100;
- uut.regfile[2] = 200;
  
- for(i=0; i<8;i=i+1) 
-    uut.memory[200+i] = i+1; // storing values in memory
- instruction = {5'b10001,4'd1,4'd2,6'd0}; #20; // instruction for fft
- 
- $display("FFT results");
- for(i=0 ; i<8 ; i=i+1) begin
-    $display("memory[%0d]=%0d",100+i,uut.memory[100+i]);  end
     
     
   uut.regfile[1] = 300; // dest
@@ -92,7 +83,7 @@ initial begin
  
  for(i=0; i<8;i=i+1) 
   uut.memory[400+i] = i+10; // storing values in memory
- instruction = {5'b10010,4'd1,4'd2,6'd0}; #20; // instruction for fencryption
+ instruction = {5'b10010,4'd1,4'd2,6'd0}; #20; // instruction for encryption
  
  $display("encrypted results");
  for(i=0 ; i<8 ; i=i+1) begin
@@ -103,7 +94,7 @@ initial begin
  uut.regfile[2] = 300;
  
  
- instruction = {5'b10011,4'd1,4'd2,6'd0}; #20;// instruction for fft
+ instruction = {5'b10011,4'd1,4'd2,6'd0}; #20;// instruction for decryption
  
  $display("decrypted results");
  for(i=0 ; i<8 ; i=i+1) begin

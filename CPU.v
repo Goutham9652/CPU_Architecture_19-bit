@@ -82,10 +82,7 @@ module CPU(
                           
                     end
                     
-                    5'b10001: begin
-                        fft(regfile[r1], regfile[r2]);                         // calling the fft task
-                        pc <= pc+1;
-                    end
+                    
                     
                     5'b10010: begin
                         encrypt(regfile[r1], regfile[r2]);                    // calling the encryption task
@@ -105,16 +102,7 @@ module CPU(
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    task fft;
-        input [18:0] test;
-        input [18:0] source;
-        integer i;
-        
-        begin
-            for(i=0; i<8; i=i+1)
-                memory[test + i] <= memory[source + i] + 1;
-        end
-    endtask
+    
     
      task encrypt;
         input [18:0] test;

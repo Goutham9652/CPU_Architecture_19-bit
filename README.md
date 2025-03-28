@@ -1,78 +1,78 @@
-#CPU_Architecture_19-bit
+# CPU_Architecture_19-bit
 
-##Overview
+## Overview
 
 This project implements a custom 19-bit CPU architecture in Verilog, following a Harvard architecture style with separate instruction and data memories. The design adopts a modular approach by isolating arithmetic/logic operations into a dedicated Extended ALU module while the CPU module handles instruction decoding, control flow, and specialized operations.
 
-###Architecture Details
+### Architecture Details
 
-*Data Width:
+* Data Width:
 All registers, memory words, and data paths are 19 bits wide.
 
-*General Purpose Registers:
+* General Purpose Registers:
 The CPU features 16 general-purpose registers, each 19 bits wide, which store temporary data and computation results.
 
-*Memory:
+* Memory:
 The design includes 524,288 memory addresses (2^19), which serve instruction and data storage, enabling efficient data access.
 
-*Instruction Format:
+* Instruction Format:
 Each 19-bit instruction consists of:
 
-*Opcode (5 bits): Defines the operation (e.g., arithmetic, logical, control, or memory access).
+* Opcode (5 bits): Defines the operation (e.g., arithmetic, logical, control, or memory access).
 Register Operands (12 bits total): Three 4-bit fields (r1, r2, r3) designate the registers involved.
 Immediate Value (14 bits): Used for addressing and immediate data, with zero extension to 19 bits when necessary.
 
-*Control Signals:
+* Control Signals:
 The design is synchronous, driven by a clock signal with an asynchronous reset that initializes the program counter, registers, and memory.
 
- ###Modular Design 
+ ## Modular Design 
 
-###CPU Module
+### CPU Module
 -Instruction Decoding:
 The CPU module extracts the opcode, register operands, and immediate values from the instruction.
 
--Control Flow:
+- Control Flow:
 It manages jumps (JMP), branches (BEQ/BNE), subroutine calls (CALL), and returns (RET) by updating the program counter and managing the stack pointer.
 
--Memory Access:
+- Memory Access:
 Instructions such as LD (load) and ST (store) are implemented to interact with the separate memory.
 
--Specialized Tasks:
+- Specialized Tasks:
 Operations like FFT, encryption, and decryption are implemented as tasks within the CPU module.
 
--Extended ALU Module
+- Extended ALU Module
 Arithmetic & Logical Operations:
 Performs operations like ADD, SUB, MUL, DIV, INC, DEC, AND, OR, XOR, and NOT.
 
--Control Flow & Memory Addressing:
+- Control Flow & Memory Addressing:
 In addition to basic operations, the ALU computes effective addresses for JMP, LD, ST and even handles conditional branch decisions (BEQ/BNE). For subroutine calls (CALL), it computes the return address.
 
--Seamless Integration:
+- Seamless Integration:
 The Extended ALU is instantiated within the CPU module, centralizing the bulk of computational tasks while simplifying the overall design.
 
-###Instruction Set
+### Instruction Set
 
--Arithmetic Operations:
+- Arithmetic Operations:
 ADD, SUB, MUL, DIV: Standard arithmetic operations.
 INC, DEC: Increment and decrement operations.
 
--Logical Operations:
+- Logical Operations:
 AND, OR, XOR, NOT: Bitwise logical operations.
 Control Flow:
 
--JMP: Unconditional jump.
--BEQ/BNE: Conditional branches based on register comparisons.
--CALL/RET: Subroutine call and return mechanism using an internal stack.
+- JMP: Unconditional jump.
+- BEQ/BNE: Conditional branches based on register comparisons.
+- CALL/RET: Subroutine call and return mechanism using an internal stack.
 
-*Memory Access:
+* Memory Access:
 
--LD: Load data from a memory address specified in the immediate field.
-ST: Store data to a memory address specified in the immediate field.
+- LD: Load data from a memory address specified in the immediate field.
+- ST: Store data to a memory address specified in the immediate field.
 Specialized Operations:
 
 
 
-###Encryption and Decryption:
+### Encryption and Decryption:
 
 A memory block is encrypted using the XOR-based algorithm.
 The encrypted data is then decrypted back to its original form, verifying the correct operation of both tasks.
